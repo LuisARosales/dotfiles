@@ -1,0 +1,149 @@
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'dracula/tmux'
+#set -g @plugin 'erikw/tmux-powerline'
+
+
+# Dracula settings
+set -g @dracula-show-left-sep  
+set -g @dracula-show-right-sep 
+set -g @dracula-border-contrast true  # pane edge highlight
+set -g @dracula-status-bg 'gray'
+
+# left icon area {
+    set -g @dracula-show-left-icon '󰠰' # before window #S     🔍  
+    # set -g @dracula-show-left-icon '卵#S #{?window_zoomed_flag, ,}' # before window #S     🔍  
+    set -g @dracula-left-icon-padding-left 1
+    set -g @dracula-left-icon-padding-right 0
+    set -g @dracula-left-icon-margin-right 1
+    set -g @dracula-left-icon-bg 'pink'
+    set -g @dracula-left-icon-fg 'dark_gray'
+    set -g @dracula-left-icon-prefix-on-bg 'red'
+    set -g @dracula-left-icon-prefix-on-fg 'white'
+# }
+
+# window area{
+    set -g @dracula-show-flags false  # marks of recent windows
+    # inactivty window
+    set -g @dracula-window-bg 'gray'
+    set -g @dracula-window-fg 'light_purple'
+    # activty window
+    set -g @dracula-window-current-bg 'green'
+    set -g @dracula-window-current-fg 'dark_gray'
+    # padding
+    set -g @dracula-window-padding-left 0
+    set -g @dracula-window-padding-right 0
+    set -g @dracula-window-margin-right 1
+    # separator mark, set to "" same as the show-sep
+    set -g @dracula-window-left-sep ''  #    
+    set -g @dracula-window-right-sep ''  #    
+    set -g @dracula-window-left-sep-invert false
+    # use customized window tag
+    set -g @dracula-window-disabled true
+
+    # Dracula Color Pallette{
+      white='#f8f8f2'
+      gray='#44475a'
+      dark_gray='#282a36'
+      light_purple='#bd93f9'
+      dark_purple='#6272a4'
+      cyan='#8be9fd'
+      green='#50fa7b'
+      orange='#ffb86c'
+      red='#ff5555'
+      pink='#ff79c6'
+      yellow='#f1fa8c'
+    # }
+
+    set-window-option -g window-status-format " \
+#[fg=${green}]#I:#W#[fg=${dark_purple}]|>\
+#[fg=${light_purple}]\
+#{?window_zoomed_flag, ,}\
+#(pwd=\"#{pane_current_path}\"; echo \${pwd####*/})\
+  "
+    set-window-option -g window-status-current-format "\
+#[bg=${gray},fg=${green}]#[bg=${green},fg=${dark_gray}]#I:#W\
+#[fg=${green},bg=${light_purple}] \
+#[fg=${yellow}]#{?window_zoomed_flag, ,}\
+#[fg=${dark_gray}]\
+#(pwd=\"#{pane_current_path}\"; echo \${pwd####*/})\
+#[fg=${light_purple},bg=${gray}] "
+  # }
+
+  # plugins{
+    set -g @dracula-show-empty-plugins false    # hide empty plugin
+    # plugins padding
+    set -g @dracula-plugin-padding-left 0
+    set -g @dracula-plugin-padding-right 1
+    set -g @dracula-plugin-padding-rightmost 1
+
+    # available plugins: battery, cpu-usage, git, gpu-usage, ram-usage, network, network-bandwidth, network-ping, attached-clients, network-vpn, weather, time, spotify-tui, kubernetes-context
+    set -g @dracula-plugins "git network-ping ram-usage cpu-usage network-vpn weather battery time"
+
+
+    # available colors: white, gray, dark_gray, light_purple, dark_purple, cyan, green, orange, red, pink, yellow
+    # set -g @dracula-[plugin-name]-colors "[background] [foreground]"
+
+    # git
+    set -g @dracula-git-colors "orange dark_gray"
+
+    # network
+    set -g @dracula-ping-server "baidu.com"
+    set -g @dracula-ping-rate 1
+    set -g @dracula-ping-label ""
+    set -g @dracula-network-ping-colors "dark_gray light_purple"
+    # set -g @dracula-network-bandwidth eth0
+    # set -g @dracula-network-bandwidth-interval 0
+    # set -g @dracula-network-bandwidth-show-interface false
+
+    # ram & cpu
+    set -g @dracula-ram-usage-label ""
+    set -g @dracula-ram-usage-colors "cyan gray"
+    set -g @dracula-cpu-usage-label ""  # 
+    set -g @dracula-cpu-display-load false  # T:avg load, F:percent
+    set -g @dracula-cpu-usage-colors "red white"
+
+    # weather
+    set -g @dracula-show-fahrenheit false   # use celsius
+    # set -g @dracula-fixed-location "Beijing"
+    set -g @dracula-show-location false
+    set -g @dracula-weather-colors "gray cyan"
+
+    # battery
+    set -g @dracula-battery-label ""  #  
+    set -g @dracula-battery-colors "dark_gray pink"
+
+    # time
+    set -g @dracula-time-colors "light_purple dark_gray"
+    set -g @dracula-military-time true      # 24 hours format
+    set -g @dracula-show-timezone false     # hide timezone
+  # }
+# }
+set -g @dracula-show-powerline true
+set -g @dracula-day-month true
+set -g @dracula-show-flags true
+set -g @dracula-plugins "network-public-ip weather time cpu-usage"
+set -g @dracula-show-empty-plugins false
+set -g @dracula 
+set -g status-position bottom
+
+# Other examples:
+# set -g @plugin 'github_username/plugin_name'
+# set -g @plugin 'github_username/plugin_name#branch'
+# set -g @plugin 'git@github.com:user/plugin'
+# set -g @plugin 'git@bitbucket.com:user/plugin'
+
+
+# Key Bindings
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+
+
+
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
